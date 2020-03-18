@@ -24,16 +24,16 @@ namespace NuKeeper.Update.Process
             var sourceUrl = packageSource.SourceUri.ToString();
             var sources = allSources.CommandLine("-s");
 
-            var restoreCommand = $"restore {projectFileName} {sources}";
-            await _externalProcess.Run(projectPath, "dotnet", restoreCommand, true);
+            // var restoreCommand = $"restore {projectFileName} {sources}";
+            // await _externalProcess.Run(projectPath, "dotnet", restoreCommand, true);
 
             if (currentPackage.Path.PackageReferenceType == PackageReferenceType.ProjectFileOldStyle)
             {
-                var removeCommand = $"remove {projectFileName} package {currentPackage.Id}";
+                var removeCommand = $"remove {projectFileName} package {currentPackage.Id}  --no-restore";
                 await _externalProcess.Run(projectPath, "dotnet", removeCommand, true);
             }
 
-            var addCommand = $"add {projectFileName} package {currentPackage.Id} -v {newVersion} -s {sourceUrl}";
+            var addCommand = $"add {projectFileName} package {currentPackage.Id} -v {newVersion} -s {sourceUrl} --no-restore";
             await _externalProcess.Run(projectPath, "dotnet", addCommand, true);
         }
     }
