@@ -21,12 +21,12 @@ namespace NuKeeper.Engine
                 return PackageTitle(updates.First());
             }
 
-            return $"Automatic update of {updates.Count} packages";
+            return $"chore(deps): Automatic update of {updates.Count} packages";
         }
 
         private static string PackageTitle(PackageUpdateSet updates)
         {
-            return $"Automatic update of {updates.SelectedId} to {updates.SelectedVersion}";
+            return $"chore(deps): Automatic update of {updates.SelectedId} to {updates.SelectedVersion}";
         }
 
         public string MakeCommitMessage(PackageUpdateSet updates)
