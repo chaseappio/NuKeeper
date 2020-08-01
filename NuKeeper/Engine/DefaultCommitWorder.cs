@@ -26,12 +26,12 @@ namespace NuKeeper.Engine
                 return PackageTitle(updates.First());
             }
 
-            return $"chore(deps): Automatic update of {updates.Count} packages";
+            return $"chore(deps): :{CommitEmoji}: Automatic update of {updates.Count} packages";
         }
 
         private static string PackageTitle(PackageUpdateSet updates)
         {
-            return $"chore(deps): Automatic update of {updates.SelectedId} to {updates.SelectedVersion}";
+            return $"chore(deps): :{CommitEmoji}: Automatic update of {updates.SelectedId} to {updates.SelectedVersion}";
         }
 
         public string MakeCommitMessage(PackageUpdateSet updates)
@@ -41,7 +41,7 @@ namespace NuKeeper.Engine
                 throw new ArgumentNullException(nameof(updates));
             }
 
-            return $":{CommitEmoji}: {PackageTitle(updates)}";
+            return $"{PackageTitle(updates)}";
         }
 
         public string MakeCommitDetails(IReadOnlyCollection<PackageUpdateSet> updates)
